@@ -6,14 +6,6 @@ import Button from './styled/Button';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 import emailjs from '@emailjs/browser';
 
-// Create a type for the form data
-interface ContactFormData {
-  user_name: string;
-  user_email: string;
-  subject: string;
-  message: string;
-}
-
 const Contact: React.FC = () => {
   const form = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);

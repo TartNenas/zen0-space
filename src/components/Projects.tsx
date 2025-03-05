@@ -41,7 +41,7 @@ const Projects: React.FC = () => {
     <Section id="projects" $accent>
       <Container>
         <SectionHeading>My Projects</SectionHeading>
-        <ProjectGrid>
+        <ProjectsGrid>
           {projects.map(project => (
             <ProjectCard key={project.id}>
               <ProjectImageContainer>
@@ -68,7 +68,7 @@ const Projects: React.FC = () => {
               </ProjectContent>
             </ProjectCard>
           ))}
-        </ProjectGrid>
+        </ProjectsGrid>
         <MoreProjectsButton>
           <Button $primary>View More Projects</Button>
         </MoreProjectsButton>
@@ -78,7 +78,7 @@ const Projects: React.FC = () => {
 };
 
 // This is your new centered grid styling
-const ProjectGrid = styled.div`
+const ProjectsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, minmax(350px, 450px));
   gap: ${props => props.theme.spacing.xl};
@@ -107,16 +107,6 @@ const SectionHeading = styled.h2`
     background-color: ${props => props.theme.colors.primary};
     margin: ${props => props.theme.spacing.sm} auto 0;
     border-radius: 2px;
-  }
-`;
-
-const ProjectsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: ${props => props.theme.spacing.xl};
-  
-  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    grid-template-columns: 1fr;
   }
 `;
 
