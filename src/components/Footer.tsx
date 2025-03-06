@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
     <StyledFooter>
       <Container>
         <FooterContent>
-          <FooterLogo>kanuar</FooterLogo>
+          <FooterLogo>zen0</FooterLogo>
           <FooterNav>
             <FooterNavItem>
               <FooterNavLink href="#home">Home</FooterNavLink>
