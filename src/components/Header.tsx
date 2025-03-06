@@ -27,7 +27,7 @@ const Header: React.FC = () => {
     <StyledHeader $isScrolled={isScrolled}>
       <Container>
         <NavWrapper>
-          <Logo>kanuar</Logo>
+          <Logo>zen0</Logo>
           
           <HamburgerButton onClick={toggleMobileMenu}>
             <span></span>
