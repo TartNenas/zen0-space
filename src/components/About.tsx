@@ -132,28 +132,6 @@ const SkillsHeading = styled.h3`
   font-size: ${props => props.theme.fontSizes.large};
 `;
 
-const SkillsList = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: ${props => props.theme.spacing.md};
-  margin-bottom: ${props => props.theme.spacing.lg};
-`;
-
-const SkillItem = styled.li`
-  list-style: none;
-  position: relative;
-  padding-left: ${props => props.theme.spacing.md};
-  font-size: ${props => props.theme.fontSizes.regular};
-  color: ${props => props.theme.colors.text};
-  
-  &:before {
-    content: "▹";
-    position: absolute;
-    left: 0;
-    color: ${props => props.theme.colors.primary};
-  }
-`;
-
 const AboutImageWrapper = styled.div`
   flex: 1;
   display: flex;
