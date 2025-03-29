@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import Container from './styled/Container';
 
 const Header: React.FC = () => {
@@ -37,19 +38,22 @@ const Header: React.FC = () => {
           
           <NavMenu $isOpen={isMobileMenuOpen}>
             <NavItem>
-              <NavLink href="#home">Home</NavLink>
+              <NavLink to="/">Home</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#about">About</NavLink>
+              <NavLink to="/#about">About</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#projects">Projects</NavLink>
+              <NavLink to="/#projects">Projects</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#skills">Skills</NavLink>
+              <NavLink to="/#skills">Skills</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#contact">Contact</NavLink>
+              <NavLink to="/#contact">Contact</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink to="/privacy">Privacy</NavLink>
             </NavItem>
           </NavMenu>
         </NavWrapper>
@@ -122,7 +126,7 @@ const NavItem = styled.li`
   }
 `;
 
-const NavLink = styled.a`
+const NavLink = styled(Link)`
   font-size: ${props => props.theme.fontSizes.regular};
   font-weight: 500;
   color: ${props => props.theme.colors.text};

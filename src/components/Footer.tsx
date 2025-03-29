@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import Container from './styled/Container';
 import { FaGithub, FaLinkedin, FaTwitter, FaHeart } from 'react-icons/fa';
 
@@ -13,19 +14,22 @@ const Footer: React.FC = () => {
           <FooterLogo>zen0</FooterLogo>
           <FooterNav>
             <FooterNavItem>
-              <FooterNavLink href="#home">Home</FooterNavLink>
+              <FooterNavLink to="/">Home</FooterNavLink>
             </FooterNavItem>
             <FooterNavItem>
-              <FooterNavLink href="#about">About</FooterNavLink>
+              <FooterNavLink to="/#about">About</FooterNavLink>
             </FooterNavItem>
             <FooterNavItem>
-              <FooterNavLink href="#projects">Projects</FooterNavLink>
+              <FooterNavLink to="/#projects">Projects</FooterNavLink>
             </FooterNavItem>
             <FooterNavItem>
-              <FooterNavLink href="#skills">Skills</FooterNavLink>
+              <FooterNavLink to="/#skills">Skills</FooterNavLink>
             </FooterNavItem>
             <FooterNavItem>
-              <FooterNavLink href="#contact">Contact</FooterNavLink>
+              <FooterNavLink to="/#contact">Contact</FooterNavLink>
+            </FooterNavItem>
+            <FooterNavItem>
+              <FooterNavLink to="/privacy">Privacy Policy</FooterNavLink>
             </FooterNavItem>
           </FooterNav>
           <SocialLinks>
@@ -83,7 +87,7 @@ const FooterNav = styled.ul`
 
 const FooterNavItem = styled.li``;
 
-const FooterNavLink = styled.a`
+const FooterNavLink = styled(Link)`
   color: ${props => props.theme.colors.light};
   transition: color ${props => props.theme.transitions.fast};
   
