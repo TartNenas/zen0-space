@@ -22,7 +22,7 @@ const projects: ProjectItem[] = [
     description: 'An easy-to-use invoicing web application designed for freelancers and small businesses. Create, manage, and send professional invoices with a clean, intuitive interface.',
     image: '/images/payvo-zen0.png',
     tags: ['React', 'TypeScript', 'Styled Components', 'Invoice Management'],
-    githubLink: 'https://github.com',
+    githubLink: '',
     liveLink: 'https://payvo.zen0.space',
   },
   {
@@ -34,9 +34,18 @@ const projects: ProjectItem[] = [
     githubLink: 'https://github.com/TartNenas/Todo-WebApp',
     liveLink: 'https://todo.zen0.space',
   },
+  {
+    id: 3,
+    title: 'Flow by zen0',
+    description: 'A powerful form builder application that allows users to create, customize, and deploy forms with ease. Perfect for surveys, feedback collection, and data gathering.',
+    image: '/images/flow-zen0.png',
+    tags: ['React', 'Form Builder', 'UI/UX', 'Data Collection'],
+    githubLink: '',
+    liveLink: 'https://flow.zen0.space',
+  },
 ];
 
-const Projects: React.FC = () => {
+const ProjectsSection: React.FC = () => {
   return (
     <Section id="projects" $accent>
       <Container>
@@ -48,9 +57,11 @@ const Projects: React.FC = () => {
                 <ProjectImage src={project.image} alt={project.title} />
                 <ProjectOverlay>
                   <ProjectLinks>
-                    <ProjectLink href={project.githubLink} target="_blank" rel="noopener noreferrer">
-                      <FaGithub />
-                    </ProjectLink>
+                    {project.githubLink && (
+                      <ProjectLink href={project.githubLink} target="_blank" rel="noopener noreferrer">
+                        <FaGithub />
+                      </ProjectLink>
+                    )}
                     <ProjectLink href={project.liveLink} target="_blank" rel="noopener noreferrer">
                       <FaExternalLinkAlt />
                     </ProjectLink>
@@ -77,12 +88,16 @@ const Projects: React.FC = () => {
   );
 };
 
-// This is your new centered grid styling
+// Updated grid styling for 3 columns
 const ProjectsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, minmax(350px, 450px));
+  grid-template-columns: repeat(3, minmax(300px, 1fr));
   gap: ${props => props.theme.spacing.xl};
   justify-content: center;
+  
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(2, minmax(300px, 1fr));
+  }
   
   @media (max-width: 900px) {
     grid-template-columns: minmax(350px, 450px);
@@ -158,6 +173,50 @@ const ProjectOverlay = styled.div`
     opacity: 1;
   }
 `;
+
+// Update the ProjectLinks rendering in the component
+const Projects: React.FC = () => {
+  return (
+    <Section id="projects" $accent>
+      <Container>
+        <SectionHeading>My Projects</SectionHeading>
+        <ProjectsGrid>
+          {projects.map(project => (
+            <ProjectCard key={project.id}>
+              <ProjectImageContainer>
+                <ProjectImage src={project.image} alt={project.title} />
+                <ProjectOverlay>
+                  <ProjectLinks>
+                    {project.githubLink && (
+                      <ProjectLink href={project.githubLink} target="_blank" rel="noopener noreferrer">
+                        <FaGithub />
+                      </ProjectLink>
+                    )}
+                    <ProjectLink href={project.liveLink} target="_blank" rel="noopener noreferrer">
+                      <FaExternalLinkAlt />
+                    </ProjectLink>
+                  </ProjectLinks>
+                </ProjectOverlay>
+              </ProjectImageContainer>
+              <ProjectContent>
+                <ProjectTitle>{project.title}</ProjectTitle>
+                <ProjectDescription>{project.description}</ProjectDescription>
+                <ProjectTags>
+                  {project.tags.map((tag, index) => (
+                    <ProjectTag key={index}>{tag}</ProjectTag>
+                  ))}
+                </ProjectTags>
+              </ProjectContent>
+            </ProjectCard>
+          ))}
+        </ProjectsGrid>
+        <MoreProjectsButton>
+          <Button $primary>View More Projects</Button>
+        </MoreProjectsButton>
+      </Container>
+    </Section>
+  );
+};
 
 const ProjectLinks = styled.div`
   display: flex;

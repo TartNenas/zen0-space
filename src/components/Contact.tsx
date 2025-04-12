@@ -68,7 +68,7 @@ const Contact: React.FC = () => {
                 </ContactIcon>
                 <ContactItemText>
                   <ContactItemLabel>Email</ContactItemLabel>
-                  <ContactItemValue>tartnenas_kai@outlook.com</ContactItemValue>
+                  <ContactItemValue>kairul@zen0.space</ContactItemValue>
                 </ContactItemText>
               </ContactItem>
               <ContactItem>

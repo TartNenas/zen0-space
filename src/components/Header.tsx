@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Container from './styled/Container';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = (): void => {
@@ -20,15 +21,47 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    // Check if there's a hash in the URL when the page loads
+    if (location.hash) {
+      // Delay to ensure all elements are rendered
+      setTimeout(() => {
+        const id = location.hash.replace('#', '');
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [location]);
+
   const toggleMobileMenu = (): void => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string): void => {
+    // Only handle scrolling if we're already on the home page
+    if (location.pathname === '/') {
+      e.preventDefault();
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        // Close mobile menu after clicking
+        setIsMobileMenuOpen(false);
+        // Update URL without page reload
+        window.history.pushState(null, '', `/#${id}`);
+      }
+    } else {
+      // We're not on the home page, so let the Link component handle navigation
+      setIsMobileMenuOpen(false);
+    }
   };
 
   return (
     <StyledHeader $isScrolled={isScrolled}>
       <Container>
         <NavWrapper>
-          <Logo>zen0</Logo>
+          <Logo>kanuar</Logo>
           
           <HamburgerButton onClick={toggleMobileMenu}>
             <span></span>
@@ -38,19 +71,19 @@ const Header: React.FC = () => {
           
           <NavMenu $isOpen={isMobileMenuOpen}>
             <NavItem>
-              <NavLink to="/">Home</NavLink>
+              <NavLink to="/" onClick={(e) => handleNavClick(e, 'home')}>Home</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/#about">About</NavLink>
+              <NavLink to="/#about" onClick={(e) => handleNavClick(e, 'about')}>About</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/#projects">Projects</NavLink>
+              <NavLink to="/#projects" onClick={(e) => handleNavClick(e, 'projects')}>Projects</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/#skills">Skills</NavLink>
+              <NavLink to="/#skills" onClick={(e) => handleNavClick(e, 'skills')}>Skills</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/#contact">Contact</NavLink>
+              <NavLink to="/#contact" onClick={(e) => handleNavClick(e, 'contact')}>Contact</NavLink>
             </NavItem>
             <NavItem>
               <NavLink to="/privacy">Privacy</NavLink>

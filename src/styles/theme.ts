@@ -1,6 +1,8 @@
-import { DefaultTheme } from 'styled-components';
+import { DetailedHTMLProps, HTMLAttributes } from 'react';
+import { DefaultTheme, FastOmit, Interpolation } from 'styled-components';
 
 interface ThemeColors {
+  white: Interpolation<FastOmit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>>;
   primary: string;
   secondary: string;
   accent: string;
