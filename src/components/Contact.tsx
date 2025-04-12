@@ -22,31 +22,36 @@ const Contact: React.FC = () => {
     setIsSubmitting(true);
     setSubmitStatus(null);
     
-    // Use environment variables for EmailJS credentials
-    emailjs.sendForm(
-      process.env.REACT_APP_EMAILJS_SERVICE_ID || '',
-      process.env.REACT_APP_EMAILJS_TEMPLATE_ID || '',
-      form.current,
-      process.env.REACT_APP_EMAILJS_PUBLIC_KEY || ''
-    )
-      .then((result) => {
-        console.log('Email sent successfully:', result.text);
-        setSubmitStatus({
-          success: true,
-          message: 'Message sent successfully! I will get back to you soon.'
-        });
-        // Reset the form
-        if (form.current) {
-          form.current.reset();
+    // Modified to match the example structure
+    emailjs
+      .sendForm(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID || '',
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID || '',
+        form.current,
+        {
+          publicKey: process.env.REACT_APP_EMAILJS_PUBLIC_KEY || '',
         }
-      })
-      .catch((error) => {
-        console.error('Failed to send email:', error.text);
-        setSubmitStatus({
-          success: false,
-          message: 'Failed to send message. Please try again later.'
-        });
-      })
+      )
+      .then(
+        (result) => {
+          console.log('SUCCESS!', result.text);
+          setSubmitStatus({
+            success: true,
+            message: 'Message sent successfully! I will get back to you soon.'
+          });
+          // Reset the form
+          if (form.current) {
+            form.current.reset();
+          }
+        },
+        (error) => {
+          console.log('FAILED...', error.text);
+          setSubmitStatus({
+            success: false,
+            message: 'Failed to send message. Please try again later.'
+          });
+        }
+      )
       .finally(() => {
         setIsSubmitting(false);
       });
@@ -271,8 +276,10 @@ const FormTextarea = styled.textarea.attrs<FormTextareaProps>(props => ({
   }
 `;
 
-// Add this new styled component for status messages
-const StatusMessage = styled.div<{ success: boolean }>`
+// Fix the StatusMessage component to prevent the warning
+const StatusMessage = styled('div').withConfig({
+  shouldForwardProp: (prop) => prop !== 'success'
+})<{ success: boolean }>`
   padding: ${props => props.theme.spacing.sm};
   margin-bottom: ${props => props.theme.spacing.md};
   border-radius: ${props => props.theme.borderRadius.small};
